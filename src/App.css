@@ -1,0 +1,52 @@
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.config-panel {
+  margin: 10px 0;
+}
+
+.reset-button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.game-board {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.word-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.word-card.matched {
+  background-color: green;
+  color: white;
+}
+
+.word-card.selected {
+  background-color: red;
+  color: white;
+}
+
+.attempts {
+  margin-top: 20px;
+  font-size: 18px;
+}
