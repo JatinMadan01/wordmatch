@@ -36,15 +36,26 @@
   font-size: 16px;
 }
 
-.word-card.matched {
-  background-color: green;
+.word-card.selected {
+  background-color: blue; /* First click color */
   color: white;
 }
 
-.word-card.selected {
-  background-color: red;
+.word-card.matched {
+  background-color: green; /* Correct match color */
   color: white;
 }
+
+.word-card.wrong {
+  background-color: red; /* Incorrect match color */
+  color: white;
+}
+
+.attempts {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
 
 .attempts {
   margin-top: 20px;

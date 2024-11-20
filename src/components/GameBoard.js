@@ -4,8 +4,8 @@ const GameBoard = ({ config }) => {
   const [words, setWords] = useState([]);
   const [selected, setSelected] = useState([]);
   const [attempts, setAttempts] = useState(0);
+  const [firstClick, setFirstClick] = useState(false); // To track if it's the first click
 
-  // Memoize generateWords to prevent recreation on every render
   const generateWords = useCallback(() => {
     const allWords = [
       "apple",
@@ -24,7 +24,6 @@ const GameBoard = ({ config }) => {
     setWords(shuffled.map((word, index) => ({ id: index, word, matched: false })));
   }, [config]);
 
-  // Run generateWords when component mounts or config changes
   useEffect(() => {
     generateWords();
   }, [generateWords]);
@@ -34,6 +33,11 @@ const GameBoard = ({ config }) => {
 
     const newSelected = [...selected, wordObj];
     setSelected(newSelected);
+
+    // Handle the first click to change color to blue
+    if (!firstClick) {
+      setFirstClick(true);
+    }
 
     if (newSelected.length === 2) {
       setAttempts((prev) => prev + 1);
@@ -45,7 +49,18 @@ const GameBoard = ({ config }) => {
         );
         setSelected([]);
       } else {
-        setTimeout(() => setSelected([]), 1000);
+        // Turn incorrect words red after 1 second, reset selected words
+        setWords((prevWords) =>
+          prevWords.map((word) =>
+            newSelected.some((sel) => sel.id === word.id) ? { ...word, selected: false, wrong: true } : word
+          )
+        );
+        setTimeout(() => {
+          setWords((prevWords) =>
+            prevWords.map((word) => ({ ...word, wrong: false }))
+          );
+          setSelected([]);
+        }, 1000);
       }
     }
   };
@@ -57,7 +72,7 @@ const GameBoard = ({ config }) => {
           key={word.id}
           className={`word-card ${word.matched ? "matched" : ""} ${
             selected.some((sel) => sel.id === word.id) ? "selected" : ""
-          }`}
+          } ${firstClick && !word.matched ? "first-click" : ""} ${word.wrong ? "wrong" : ""}`} // Apply wrong class for incorrect match
           onClick={() => handleWordClick(word)}
         >
           {word.word} {/* Display the word */}

@@ -5,7 +5,7 @@ import ResetButton from './components/ResetButton';
 import './App.css';
 
 const App = () => {
-  const [config, setConfig] = useState({ groupSize: 2, itemCount: 8, columns: 4 });
+  const [config, setConfig] = useState({ groupSize: 2, itemCount: 16, columns: 4 });
   const [resetKey, setResetKey] = useState(0);
 
   const handleConfigChange = (newConfig) => setConfig(newConfig);
