@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+Word Connect Game
+The Word Connect Game is an interactive and customizable React-based word-matching game. Players match pairs of related words, get visual feedback on their selections, and can track their attempts. The game also includes a configuration panel to adjust gameplay settings such as group size, number of items, and grid layout.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+1. Interactive Gameplay
+Match pairs of words from the same group.
+Visual feedback:
+Green for correct matches.
+Red for incorrect matches.
+Matched pairs disappear from the board.
+2. Attempts Tracking
+Tracks and displays the total number of attempts made by the user.
+3. Customizable Settings
+Configurable group size (e.g., 2, 3, or more words per group).
+Set the total number of items to match (e.g., 8, 12, 16).
+Define the number of columns in the grid layout for a dynamic board.
+4. Reset Button
+Clear the board, reset the attempt counter, and start a new game.
+5. Dynamic Grid Layout
+Adjusts automatically based on the column count specified in the settings.
+6. React Best Practices
+Built with React functional components.
+Utilizes React hooks (useState, useEffect, useCallback).
+Modular and maintainable code structure.
+Project Structure
+bash
+Copy code
+src/
+├── components/
+│   ├── GameBoard.js         # Main game logic and UI
+│   ├── ConfigPanel.js       # Configuration panel for settings
+│   └── ResetButton.js       # Button to reset the game
+├── App.js                   # Root component
+├── App.css                  # Styles for the application
+├── index.js                 # Entry point for the app
+How to Run the Project
+1. Clone the Repository
+bash
+Copy code
+git clone https://github.com/your-username/word-connect.git
+cd word-connect
+2. Install Dependencies
+bash
+Copy code
+npm install
+3. Start the Development Server
+bash
+Copy code
+npm start
+4. Build for Production
+bash
+Copy code
+npm run build
+Usage Instructions
+Launch the Game:
 
-## Available Scripts
+Open the game in your browser at http://localhost:3000 (or the hosted link if deployed).
+Customize Settings:
 
-In the project directory, you can run:
+Use the Config Panel to adjust group size, item count, and grid columns.
+Match Words:
 
-### `npm start`
+Click on two words to try and match them.
+Correct matches turn green and disappear.
+Incorrect matches turn red but remain visible.
+Track Your Progress:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The total number of attempts is displayed at the bottom of the game board.
+Reset the Game:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Click the Reset Button to clear the board and start fresh.
+Demo
+Hosted Link: Word Connect Demo
+GitHub Repository: Word Connect GitHub
+Technologies Used
+React.js: Core library for building the user interface.
+CSS: For styling the components and layout.
+JavaScript (ES6+): Logic and functionality implementation.
+Deployment
+This project can be deployed on any static hosting platform (e.g., Netlify, Vercel, GitHub Pages). After running npm run build, upload the build folder to your hosting platform.
 
-### `npm test`
+Future Improvements
+Add a timer to track how quickly users complete the game.
+Introduce multiple difficulty levels (e.g., varying word complexity).
+Include a leaderboard for high scores.
+Add sound effects for interactions.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Author
+Jatin Madan
+GitHub Profile :https://github.com/JatinMadan01/wordmatch.git?authuser=0
