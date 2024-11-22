@@ -4,8 +4,8 @@ const GameBoard = ({ config }) => {
   const [words, setWords] = useState([]);
   const [selected, setSelected] = useState([]);
   const [attempts, setAttempts] = useState(0);
-  const [firstClick, setFirstClick] = useState(false); // To track if it's the first click
 
+  // Generate shuffled words based on group size and item count
   const generateWords = useCallback(() => {
     const allWords = [
       "apple",
@@ -19,48 +19,59 @@ const GameBoard = ({ config }) => {
       "lichi",
       "watermelon",
     ];
-    const chosenWords = allWords.slice(0, config.itemCount / config.groupSize);
-    const shuffled = [...chosenWords, ...chosenWords].sort(() => Math.random() - 0.5);
-    setWords(shuffled.map((word, index) => ({ id: index, word, matched: false })));
+
+    // Validate item count is divisible by group size
+    if (config.itemCount % config.groupSize !== 0) {
+      alert("Item count must be divisible by group size!");
+      return;
+    }
+
+    const groupCount = config.itemCount / config.groupSize; // Number of unique groups
+    const chosenWords = allWords.slice(0, groupCount); // Pick words for the groups
+    const wordPool = [];
+
+    // Duplicate words based on group size
+    chosenWords.forEach((word) => {
+      for (let i = 0; i < config.groupSize; i++) {
+        wordPool.push(word);
+      }
+    });
+
+    // Shuffle the pool of words
+    const shuffled = wordPool.sort(() => Math.random() - 0.5);
+
+    setWords(
+      shuffled.map((word, index) => ({
+        id: index,
+        word,
+        matched: false,
+      }))
+    );
   }, [config]);
 
   useEffect(() => {
     generateWords();
   }, [generateWords]);
 
+  // Handle word selection and matching logic
   const handleWordClick = (wordObj) => {
-    if (wordObj.matched || selected.length === 2) return;
+    if (wordObj.matched || selected.length === config.groupSize) return;
 
     const newSelected = [...selected, wordObj];
     setSelected(newSelected);
 
-    // Handle the first click to change color to blue
-    if (!firstClick) {
-      setFirstClick(true);
-    }
-
-    if (newSelected.length === 2) {
+    if (newSelected.length === config.groupSize) {
       setAttempts((prev) => prev + 1);
-      if (newSelected[0].word === newSelected[1].word) {
+
+      // Check if all selected words are the same
+      const isMatch = newSelected.every((sel) => sel.word === newSelected[0].word);
+      if (isMatch) {
         setWords((prevWords) =>
-          prevWords.map((word) =>
-            newSelected.some((sel) => sel.id === word.id) ? { ...word, matched: true } : word
-          )
+          prevWords.filter((word) => !newSelected.some((sel) => sel.id === word.id))
         );
         setSelected([]);
       } else {
-        // Turn incorrect words red after 1 second, reset selected words
-        setWords((prevWords) =>
-          prevWords.map((word) =>
-            newSelected.some((sel) => sel.id === word.id) ? { ...word, selected: false, wrong: true } : word
-          )
-        );
-        setTimeout(() => {
-          setWords((prevWords) =>
-            prevWords.map((word) => ({ ...word, wrong: false }))
-          );
-          setSelected([]);
-        }, 1000);
+        setTimeout(() => setSelected([]), 1000);
       }
     }
   };
@@ -70,12 +81,12 @@ const GameBoard = ({ config }) => {
       {words.map((word) => (
         <div
           key={word.id}
-          className={`word-card ${word.matched ? "matched" : ""} ${
+          className={`word-card ${
             selected.some((sel) => sel.id === word.id) ? "selected" : ""
-          } ${firstClick && !word.matched ? "first-click" : ""} ${word.wrong ? "wrong" : ""}`} // Apply wrong class for incorrect match
+          }`}
           onClick={() => handleWordClick(word)}
         >
-          {word.word} {/* Display the word */}
+          {word.word}
         </div>
       ))}
       <div className="attempts">Attempts: {attempts}</div>

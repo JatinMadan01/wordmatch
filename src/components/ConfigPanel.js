@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ConfigPanel = ({ config, onConfigChange }) => {
   const handleChange = (e) => {
@@ -10,15 +10,34 @@ const ConfigPanel = ({ config, onConfigChange }) => {
     <div className="config-panel">
       <label>
         Group Size:
-        <input type="number" name="groupSize" value={config.groupSize} onChange={handleChange} min="2" />
+        <input
+          type="number"
+          name="groupSize"
+          value={config.groupSize}
+          onChange={handleChange}
+          min="2"
+        />
       </label>
       <label>
         Item Count:
-        <input type="number" name="itemCount" value={config.itemCount} onChange={handleChange} min="4" />
+        <input
+          type="number"
+          name="itemCount"
+          value={config.itemCount}
+          onChange={handleChange}
+          min="4"
+          step={config.groupSize} // Ensure item count increments match group size
+        />
       </label>
       <label>
         Columns:
-        <input type="number" name="columns" value={config.columns} onChange={handleChange} min="2" />
+        <input
+          type="number"
+          name="columns"
+          value={config.columns}
+          onChange={handleChange}
+          min="2"
+        />
       </label>
     </div>
   );
